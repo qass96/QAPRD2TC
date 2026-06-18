@@ -29,12 +29,17 @@
 
   function renderTable() {
     var tbody = $("#tc-tbody");
+    var wrap = $("#table-wrap");
+    var empty = $("#result-empty");
     var cases = state.cases;
     if (!cases.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="9" class="empty-row">아직 생성된 테스트 케이스가 없습니다. 왼쪽에 기획서를 입력하고 🚀 변환 버튼을 눌러보세요.</td></tr>';
+      tbody.innerHTML = "";
+      if (wrap) wrap.hidden = true;
+      if (empty) empty.hidden = false;
       return;
     }
+    if (empty) empty.hidden = true;
+    if (wrap) wrap.hidden = false;
     var html = cases
       .map(function (tc) {
         var steps = (tc.steps || [])

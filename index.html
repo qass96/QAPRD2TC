@@ -152,7 +152,16 @@
         <span class="meta-item dot-boundary">경계 <strong id="stat-boundary">0</strong></span>
       </div>
 
-      <div class="table-wrap">
+      <!-- 생성 전 기본 안내 (표와 분리해 겹침 방지) -->
+      <div id="result-empty" class="result-empty">
+        <span class="result-empty-icon" aria-hidden="true">🧪</span>
+        <p class="result-empty-text">
+          아직 생성된 테스트 케이스가 없습니다.<br />
+          왼쪽에 기획서를 입력하고 <strong>🚀 테스트 케이스 변환</strong> 버튼을 눌러보세요.
+        </p>
+      </div>
+
+      <div id="table-wrap" class="table-wrap" hidden>
         <table class="tc-table">
           <thead>
             <tr>
