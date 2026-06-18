@@ -147,6 +147,8 @@ a:hover { text-decoration: underline; }
   min-width: 0; /* 그리드 칸이 내부 표(min-width)에 밀려 넓어지는 것 방지 */
 }
 .input-panel { position: sticky; top: calc(var(--header-h) + 18px); }
+/* 생성 후 결과로 스크롤될 때 상단 고정 헤더에 가리지 않도록 여백 확보 */
+#result-section { scroll-margin-top: calc(var(--header-h) + 14px); }
 
 .panel-head {
   display: flex;
@@ -304,11 +306,18 @@ a:hover { text-decoration: underline; }
 .dot-exception::before { background: var(--exception); }
 .dot-boundary::before { background: var(--boundary); }
 
-.table-wrap { overflow-x: auto; width: 100%; max-width: 100%; border: 1px solid var(--border); border-radius: 10px; }
+.table-wrap {
+  overflow: auto;
+  max-height: calc(100vh - 200px);
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
 .tc-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 880px; }
 .tc-table thead th {
   position: sticky;
-  top: var(--header-h);
+  top: 0; /* 표 자체 스크롤 영역 기준으로 고정 → 첫 행과 겹치지 않음 */
   z-index: 1;
   background: var(--th-bg);
   color: var(--text-soft);
