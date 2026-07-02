@@ -503,11 +503,6 @@ a:hover { text-decoration: underline; }
   content: "여기에 기획서를 붙여넣으세요";
   color: var(--text-soft); opacity: 0.55;
 }
-.demo-textarea.demo-focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
-  background: var(--surface);
-}
 .demo-textarea span { display: block; opacity: 0; transition: opacity 0.3s ease; }
 .demo-textarea span.show { opacity: 1; }
 .demo-generate {

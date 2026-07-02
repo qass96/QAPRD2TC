@@ -61,7 +61,6 @@
   function reset() {
     ta.innerHTML = "";
     tbody.innerHTML = "";
-    ta.classList.remove("demo-focus");
     chip.classList.remove("demo-active");
     var s = stage.getBoundingClientRect();
     cursor.style.transition = "none";
@@ -89,12 +88,12 @@
   function cycle() {
     clearTimers();
     reset();
-    // 실무 베스트 흐름: 기획서를 입력창에 붙여넣기 → 변환
-    at(700, function () { moveCursorTo(ta); });
-    at(1650, function () { clickPulse(ta, false); ta.classList.add("demo-focus"); });
+    // 실제 동작대로: 예시 버튼 클릭 → 입력칸이 채워짐 → 변환
+    at(700, function () { moveCursorTo(chip); });
+    at(1650, function () { clickPulse(chip); chip.classList.add("demo-active"); });
     lines.forEach(function (l, i) { at(1900 + i * 360, function () { addLine(l); }); });
     at(3200, function () { moveCursorTo(genBtn); });
-    at(4150, function () { clickPulse(genBtn); ta.classList.remove("demo-focus"); });
+    at(4150, function () { clickPulse(genBtn); });
     rows.forEach(function (r, i) { at(4500 + i * 340, function () { addRow(r); }); });
     at(4500 + rows.length * 340 + 2800, cycle); // 잠깐 멈췄다가 다시 반복
   }
@@ -107,6 +106,7 @@
       span.classList.add("show");
       ta.appendChild(span);
     });
+    chip.classList.add("demo-active");
     tbody.innerHTML = rows.map(function (r) {
       return '<tr class="demo-row show">' + cellsHtml(r) + "</tr>";
     }).join("");
