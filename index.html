@@ -71,6 +71,42 @@
     </div>
   </section>
 
+  <!-- 사용 예시 자동 데모: 예시 클릭 → 변환 클릭 → TC 생성 흐름을 상단에서 바로 보여줌 -->
+  <section class="demo container" aria-label="사용 예시 데모">
+    <div class="demo-head">
+      <h2>이렇게 동작합니다</h2>
+      <p>예시를 고르고 <strong>변환</strong> 버튼만 누르면 테스트 케이스가 자동으로 만들어집니다.</p>
+    </div>
+    <div class="demo-window" id="demo-window">
+      <div class="demo-bar" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <em>QA PRD → TC</em>
+      </div>
+      <div class="demo-stage" id="demo-stage">
+        <div class="demo-input">
+          <div class="demo-samples">
+            <button class="demo-chip" type="button" data-demo-chip tabindex="-1">로그인/회원</button>
+            <button class="demo-chip" type="button" tabindex="-1">쇼핑몰 주문</button>
+            <button class="demo-chip" type="button" tabindex="-1">게시판</button>
+          </div>
+          <div class="demo-textarea" id="demo-textarea" aria-hidden="true"></div>
+          <button class="demo-generate" id="demo-generate" type="button" tabindex="-1">테스트 케이스 변환</button>
+        </div>
+        <div class="demo-result">
+          <table class="demo-table">
+            <thead>
+              <tr><th>TC ID</th><th>시나리오</th><th>유형</th><th>우선순위</th></tr>
+            </thead>
+            <tbody id="demo-tbody"></tbody>
+          </table>
+        </div>
+        <div class="demo-cursor" id="demo-cursor" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5.5 3.2 L5.5 19 L9.3 15.2 L11.8 21 L14 20.1 L11.5 14.5 L17 14.5 Z" fill="#ffffff" stroke="#1f2733" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 메인 작업 영역 -->
   <main id="tool" class="container main-grid">
     <!-- 입력 패널 -->
@@ -226,6 +262,7 @@
   <script src="assets/js/ai.js"></script>
   <script src="assets/js/export.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/demo.js"></script>
 
   <!-- 데스크탑/모바일 폭 프리뷰 토글 (우측 하단 고정, 모바일에서도 항상 노출) -->
   <script>
