@@ -226,5 +226,41 @@
   <script src="assets/js/ai.js"></script>
   <script src="assets/js/export.js"></script>
   <script src="assets/js/app.js"></script>
+
+  <!-- 데스크탑 강제 프리뷰 토글 (?preview 접속 시에만 렌더링. 일반 사용자에겐 DOM에 없음) -->
+  <script>
+    (function () {
+      if (!new URLSearchParams(location.search).has("preview")) return;
+      var vp = document.querySelector('meta[name="viewport"]');
+      if (!vp) return;
+      var mobileContent = vp.getAttribute("content"); // 원복용 원본(width=device-width...) 보관
+      var desktopContent = "width=1200";
+      var on = false;
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = "PC";
+      btn.setAttribute("aria-label", "데스크탑 레이아웃 미리보기 전환");
+      btn.style.cssText = [
+        "position:fixed", "right:12px", "bottom:12px", "z-index:2147483647",
+        "padding:5px 11px", "font-size:11px", "font-weight:600", "font-family:inherit",
+        "line-height:1.4", "border:1px solid rgba(0,0,0,0.15)", "border-radius:999px",
+        "background:rgba(30,35,45,0.5)", "color:#fff", "cursor:pointer",
+        "opacity:0.45", "-webkit-backdrop-filter:blur(4px)", "backdrop-filter:blur(4px)",
+        "box-shadow:0 2px 8px rgba(0,0,0,0.25)", "transition:opacity 0.15s"
+      ].join(";");
+      btn.addEventListener("mouseenter", function () { btn.style.opacity = "0.95"; });
+      btn.addEventListener("mouseleave", function () { btn.style.opacity = on ? "0.85" : "0.45"; });
+      btn.addEventListener("click", function () {
+        on = !on;
+        vp.setAttribute("content", on ? desktopContent : mobileContent);
+        btn.textContent = on ? "모바일" : "PC";
+        btn.style.background = on ? "rgba(79,110,247,0.85)" : "rgba(30,35,45,0.5)";
+        btn.style.opacity = on ? "0.85" : "0.45";
+      });
+
+      document.body.appendChild(btn);
+    })();
+  </script>
 </body>
 </html>

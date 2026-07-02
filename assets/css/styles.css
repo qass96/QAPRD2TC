@@ -151,7 +151,10 @@ a:hover { text-decoration: underline; }
 /* ── 메인 레이아웃 ───────────────────── */
 .main-grid {
   display: grid;
-  grid-template-columns: minmax(360px, 460px) 1fr;
+  /* 넓은 화면에서도 모바일처럼 1칼럼 + 가운데 정렬로 꽉 차 보이게 (휑함 제거).
+     .container(max-width:1180px)를 이 값으로 덮어써 좁게 중앙 정렬한다. */
+  grid-template-columns: 1fr;
+  max-width: 820px;
   gap: 22px;
   padding-top: 28px;
   padding-bottom: 32px;
@@ -166,7 +169,8 @@ a:hover { text-decoration: underline; }
   padding: 20px;
   min-width: 0; /* 그리드 칸이 내부 표(min-width)에 밀려 넓어지는 것 방지 */
 }
-.input-panel { position: sticky; top: calc(var(--header-h) + 18px); }
+/* 1칼럼 세로 배치이므로 입력 패널을 sticky로 두지 않는다 */
+.input-panel { position: static; }
 /* 생성 후 결과로 스크롤될 때 상단 고정 헤더에 가리지 않도록 여백 확보 */
 #result-section { scroll-margin-top: calc(var(--header-h) + 14px); }
 
