@@ -49,18 +49,19 @@
     var y = r.top - s.top + r.height / 2;
     cursor.style.transform = "translate(" + x + "px," + y + "px)";
   }
-  function clickPulse(el) {
+  function clickPulse(el, press) {
     cursor.classList.remove("clicking");
     void cursor.offsetWidth; // 재생 리셋
     cursor.classList.add("clicking");
-    el.classList.add("demo-press");
+    if (press !== false) el.classList.add("demo-press");
     at(300, function () { cursor.classList.remove("clicking"); });
-    at(340, function () { el.classList.remove("demo-press"); });
+    at(340, function () { if (press !== false) el.classList.remove("demo-press"); });
   }
 
   function reset() {
     ta.innerHTML = "";
     tbody.innerHTML = "";
+    ta.classList.remove("demo-focus");
     chip.classList.remove("demo-active");
     var s = stage.getBoundingClientRect();
     cursor.style.transition = "none";
@@ -88,11 +89,12 @@
   function cycle() {
     clearTimers();
     reset();
-    at(700, function () { moveCursorTo(chip); });
-    at(1650, function () { clickPulse(chip); chip.classList.add("demo-active"); });
+    // 실무 베스트 흐름: 기획서를 입력창에 붙여넣기 → 변환
+    at(700, function () { moveCursorTo(ta); });
+    at(1650, function () { clickPulse(ta, false); ta.classList.add("demo-focus"); });
     lines.forEach(function (l, i) { at(1900 + i * 360, function () { addLine(l); }); });
     at(3200, function () { moveCursorTo(genBtn); });
-    at(4150, function () { clickPulse(genBtn); });
+    at(4150, function () { clickPulse(genBtn); ta.classList.remove("demo-focus"); });
     rows.forEach(function (r, i) { at(4500 + i * 340, function () { addRow(r); }); });
     at(4500 + rows.length * 340 + 2800, cycle); // 잠깐 멈췄다가 다시 반복
   }
@@ -105,7 +107,6 @@
       span.classList.add("show");
       ta.appendChild(span);
     });
-    chip.classList.add("demo-active");
     tbody.innerHTML = rows.map(function (r) {
       return '<tr class="demo-row show">' + cellsHtml(r) + "</tr>";
     }).join("");
